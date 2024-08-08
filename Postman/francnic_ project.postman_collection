@@ -1,0 +1,2599 @@
+{
+	"info": {
+		"_postman_id": "a7bb536b-c82f-4d56-b85a-6783dd536cc7",
+		"name": "hw9 final project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30520703"
+	},
+	"item": [
+		{
+			"name": "Auth0 token user1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set jwt_1 environment variable from response\r",
+							"pm.environment.set(\"jwt1\", pm.response.json()[\"id_token\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"username\": \"test@test.com\",\r\n    \"password\": \"test1234!\",\r\n    \"client_id\": \"nTof6IpKYDmTrGWsmVQfz32lHnD9nKaN\",\r\n    \"client_secret\": \"9PtoTz90Tt80XGaFQpFVngZb2ILEsTh8yk5TpgJ-Owo4-Lk5Egnn8TvkSn5bzGX1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cs493-francnic.us.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"cs493-francnic",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Auth0 token user2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set jwt_1 environment variable from response\r",
+							"pm.environment.set(\"jwt2\", pm.response.json()[\"id_token\"]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"username\": \"cartest@test.com\",\r\n    \"password\": \"Cartest1234!\",\r\n    \"client_id\": \"nTof6IpKYDmTrGWsmVQfz32lHnD9nKaN\",\r\n    \"client_secret\": \"9PtoTz90Tt80XGaFQpFVngZb2ILEsTh8yk5TpgJ-Owo4-Lk5Egnn8TvkSn5bzGX1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://cs493-francnic.us.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"cs493-francnic",
+						"us",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new car user1 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set car id environment variable from response\r",
+							"pm.environment.set(\"car_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Honda\",\r\n\"model\": \"S2000\",\r\n\"year\": 2004\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new car user2 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set car id environment variable from response\r",
+							"pm.environment.set(\"car_id2\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Subaru\",\r\n\"model\": \"STi\",\r\n\"year\": 2006\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new car2 user1 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set car id environment variable from response\r",
+							"pm.environment.set(\"car_id3\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Toyota\",\r\n\"model\": \"Tacoma\",\r\n\"year\": 2016\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new car3 user1 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set car id environment variable from response\r",
+							"pm.environment.set(\"car_id4\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Honda\",\r\n\"model\": \"Civic\",\r\n\"year\": 2000\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new car4 user1 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set car id environment variable from response\r",
+							"pm.environment.set(\"car_id5\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Acura\",\r\n\"model\": \"RSX\",\r\n\"year\": 2002\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new car5 user1 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set car id environment variable from response\r",
+							"pm.environment.set(\"car_id6\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Mazda\",\r\n\"model\": \"Miata\",\r\n\"year\": 1995\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new car6 user1 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set car id environment variable from response\r",
+							"pm.environment.set(\"car_id7\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Acura\",\r\n\"model\": \"NSX\",\r\n\"year\": 1991\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new car invalid token 401",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set car id environment variable from response\r",
+							"//pm.environment.set(\"car_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"401 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "13541",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Acura\",\r\n\"model\": \"RSX\",\r\n\"year\": 2002\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all cars user1 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"// pm.environment.set(\"boat_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 200 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all cars Accepts Error 406",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"406 status code\", function () {\r",
+							"    pm.response.to.have.status(406);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car w/id user1 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"// pm.environment.set(\"boat_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 200 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car w/id Accepts Error 406",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"406 status code\", function () {\r",
+							"    pm.response.to.have.status(406);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car w/id invalid Jwt 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {\r",
+							"    //Check for 403 status code\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car w/id missing Jwt 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {\r",
+							"    //Check for 403 status code\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new part1 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"pm.environment.set(\"part_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"Coilover\",\r\n\"component\": \"Suspension\",\r\n\"install_date\": \"6/20/2015\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/parts",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new part2 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"pm.environment.set(\"part_id2\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"Intake\",\r\n\"component\": \"Engine\",\r\n\"install_date\": \"10/20/2015\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/parts",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add new part3 201",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"pm.environment.set(\"part_id3\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"201 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(201);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"Summer Tires\",\r\n\"component\": \"Wheels and Tires\",\r\n\"install_date\": \"4/5/2017\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/parts",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all parts 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/parts",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get part w/id 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"// pm.environment.set(\"boat_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 200 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch update car 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for apprropriate status code 200\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"year\": 2005\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch update car invalid Jwt 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {\r",
+							"    //Check for apprropriate status code 403\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"year\": 2005\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch update car missing Jwt 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"401 status code\", function () {\r",
+							"    //Check for apprropriate status code 401\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"year\": 2005\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put update car 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 200 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Subaru\",\r\n\"model\": \"BRZ\",\r\n\"year\": 2022\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put update car invalid Jwt 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {\r",
+							"    //Check for apprropriate status code 403\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Acura\",\r\n\"model\": \"NSX\",\r\n\"year\": 1991\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put update car missing Jwt 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"401 status code\", function () {\r",
+							"    //Check for apprropriate status code 401\r",
+							"    pm.response.to.have.status(401);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"make\": \"Acura\",\r\n\"model\": \"NSX\",\r\n\"year\": 1991\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Patch update part 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for apprropriate status code 200\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"install_date\": \"7/20/2016\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put update part 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for apprropriate status code 200\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\": \"Bucket Seat\",\r\n\"component\": \"Interior\",\r\n\"install_date\": \"5/25/2019\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put part1 on car1 invalid Jwt 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {",
+							"    //Check for appropriate 403 status code",
+							"    pm.response.to.have.status(403);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}",
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car w/id user1 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"// pm.environment.set(\"boat_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 200 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put part1 on car1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {",
+							"    //Check for appropriate 204 status code",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}",
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put part2 on car1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {",
+							"    //Check for appropriate 204 status code",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}/parts/{{part_id2}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}",
+						"parts",
+						"{{part_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put part3 on car1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {",
+							"    //Check for appropriate 204 status code",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}/parts/{{part_id3}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}",
+						"parts",
+						"{{part_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put already assigned part1 on car1 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {",
+							"    //Check for appropriate 403 status code",
+							"    pm.response.to.have.status(403);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}",
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car w/id user1 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"// pm.environment.set(\"boat_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 200 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete part1 from car1 invalid Jwt 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {",
+							"    //Check for apprropriate status code 204",
+							"    pm.response.to.have.status(403);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}",
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete part1 from car1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {",
+							"    //Check for apprropriate status code 204",
+							"    pm.response.to.have.status(204);",
+							"});",
+							"",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}",
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete part2 installed on car1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for 204 status code\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/parts/{{part_id2}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts",
+						"{{part_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get car w/id user1 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"// pm.environment.set(\"boat_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 200 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car1 invalid Jwt user1 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car1 with parts user1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get deleted car1 w/id user1 404",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"404 status code\", function () {\r",
+							"    //Check for 400 status code\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all parts 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Set boat id environment variable from response\r",
+							"// pm.environment.set(\"boat_id\", pm.response.json()[\"id\"]);\r",
+							"\r",
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 201 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/parts",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car root URL 405",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"405 status code\", function () {\r",
+							"    pm.response.to.have.status(405);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/xml",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Odyssey\",\r\n  \"type\": \"Yatch\",\r\n  \"length\": 99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{app_url}}/cars",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all users 200",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"200 status code\", function () {\r",
+							"    //Check for 200 status code\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/users",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car2 invalid Jwt 403",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {\r",
+							"    //Check for apprropriate status code 403\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id3}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car2 missing Jwt 401",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"403 status code\", function () {\r",
+							"    //Check for apprropriate status code 403\r",
+							"    pm.response.to.have.status(403);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id3}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car2 user1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id3}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id3}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car3 user1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id4}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id4}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car4 user1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id5}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id5}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car5 user1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id6}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id6}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car6 user1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id7}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id7}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete car2 user2 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{jwt2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/cars/{{car_id2}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"cars",
+						"{{car_id2}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete part1 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/parts/{{part_id}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts",
+						"{{part_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete part3 204",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"204 status code\", function () {\r",
+							"    //Check for apprropriate status code 204\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{app_url}}/parts/{{part_id3}}",
+					"host": [
+						"{{app_url}}"
+					],
+					"path": [
+						"parts",
+						"{{part_id3}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
